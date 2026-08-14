@@ -1,0 +1,112 @@
+{% extends "website/base.html" %}
+{% load static %}
+
+{% block title %}{{ site.name }} · Quantitative Developer{% endblock %}
+
+{% block content %}
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-copy">
+      <p class="eyebrow">Quantitative developer · New York</p>
+      <h1 id="hero-title">{{ site.headline }}</h1>
+      <p class="hero-summary">{{ site.supporting_line }}</p>
+      <p>{{ site.current_employer_line }}</p>
+      <div class="hero-actions">
+        <a class="button" href="{% url 'website:case_studies' %}">View case studies</a>
+        <a class="text-link" href="{% url 'website:experience' %}">Explore experience</a>
+      </div>
+    </div>
+    <svg class="risk-surface" aria-hidden="true" focusable="false" viewBox="0 0 640 540">
+      <path d="M-18 432C72 331 183 367 257 290C327 217 353 91 465 72C531 61 584 94 658 49" />
+      <path d="M-22 479C71 387 176 416 275 335C370 258 376 147 482 121C545 105 596 135 662 98" />
+      <path class="risk-surface__signal" d="M-20 526C91 443 201 470 296 390C391 310 423 220 505 190C565 168 612 187 660 168" />
+      <path d="M94 558C154 491 240 505 333 444C438 376 454 293 535 260C579 242 624 242 670 221" />
+      <path d="M241 563C309 520 378 508 435 463C511 402 522 342 584 311C616 295 643 289 675 270" />
+      <circle class="risk-surface__point" cx="505" cy="190" r="7" />
+    </svg>
+    <div class="hero-proof" aria-labelledby="proof-title">
+      <p class="section-index" aria-hidden="true">01</p>
+      <h2 id="proof-title">Selected outcomes</h2>
+      <dl class="proof-ledger">
+        {% for point in proof_points %}
+          <div class="proof-item">
+            <dt>
+              {{ point.value|cut:" billion" }}{% if "billion" in point.value %}B{% endif %}
+            </dt>
+            <dd>
+              <strong>{{ point.label }}</strong>
+              <span>{{ point.detail }}</span>
+            </dd>
+          </div>
+        {% endfor %}
+      </dl>
+    </div>
+  </section>
+
+  <section class="featured-work" aria-labelledby="featured-work-title">
+    <p class="section-index" aria-hidden="true">02</p>
+    <h2 id="featured-work-title">Case studies</h2>
+    <div class="case-grid">
+      {% for study in case_studies %}
+        {% include "website/includes/case_card.html" with study=study %}
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="capabilities" aria-labelledby="capabilities-title">
+    <p class="section-index" aria-hidden="true">03</p>
+    <h2 id="capabilities-title">Capabilities</h2>
+    <div class="capability-grid">
+      {% for group in skill_groups %}
+        <article class="capability-group">
+          <h3>{{ group.title }}</h3>
+          <ul>
+            {% for skill in group.skills %}<li>{{ skill }}</li>{% endfor %}
+          </ul>
+          <p><strong>Evidence:</strong> {{ group.evidence }}</p>
+        </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="independent-work" aria-labelledby="independent-work-title">
+    <p class="section-index" aria-hidden="true">04</p>
+    <h2 id="independent-work-title">Independent Work</h2>
+    {% for work in independent_work %}
+      {% if forloop.first %}
+        <figure class="finapp-feature">
+          <div class="finapp-media">
+            <img
+              src="{% static 'website/img/finapp-dashboard-light.png' %}"
+              alt="FinApp dashboard showing account balances, spending, budgets, and upcoming bills"
+              width="1242"
+              height="2688"
+              loading="lazy"
+            >
+          </div>
+          <figcaption>
+            <p class="eyebrow">{{ work.kind }}</p>
+            <h3>{{ work.title }}</h3>
+            <p>{{ work.description }}</p>
+            {% if work.repository %}
+              <a href="{{ work.repository }}" target="_blank" rel="noreferrer noopener">
+                View repository <span class="visually-hidden">(opens in a new tab)</span>
+              </a>
+            {% endif %}
+          </figcaption>
+        </figure>
+      {% else %}
+        <article class="independent-card">
+          <p class="eyebrow">{{ work.kind }}</p>
+          <h3>{{ work.title }}</h3>
+          <p>{{ work.description }}</p>
+          {% if work.repository %}
+            <a href="{{ work.repository }}" target="_blank" rel="noreferrer noopener">
+              View repository <span class="visually-hidden">(opens in a new tab)</span>
+            </a>
+          {% endif %}
+        </article>
+      {% endif %}
+    {% endfor %}
+  </section>
+
+{% endblock %}

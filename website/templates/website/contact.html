@@ -1,0 +1,35 @@
+{% extends "website/base.html" %}
+
+{% block title %}Contact · {{ site.name }}{% endblock %}
+
+{% block content %}
+  <header class="page-header contact-header">
+    <p class="eyebrow">Contact</p>
+    <h1>Let’s discuss rigorous quantitative systems.</h1>
+    <p>
+      For conversations about quantitative development, risk and pricing systems,
+      or banking technology.
+    </p>
+    <a class="contact-email" href="mailto:{{ site.email }}">{{ site.email }}</a>
+  </header>
+
+  <section class="contact-directory" aria-labelledby="contact-directory-title">
+    <p class="section-index" aria-hidden="true">01</p>
+    <div class="contact-directory__content">
+      <p class="eyebrow">{{ site.location }}</p>
+      <h2 id="contact-directory-title">Professional profiles.</h2>
+      <ul class="contact-links" aria-label="Professional profiles">
+        <li>
+          <a href="{{ site.linkedin }}" target="_blank" rel="noreferrer noopener">
+            LinkedIn <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </li>
+        <li>
+          <a href="{{ site.github }}" target="_blank" rel="noreferrer noopener">
+            GitHub <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+{% endblock %}

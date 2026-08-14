@@ -1,0 +1,78 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{{ meta_title }}{% endblock %}</title>
+    <meta name="description" content="{{ meta_description }}">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <meta property="og:site_name" content="{{ site.name }}">
+    <meta property="og:type" content="{{ meta_type }}">
+    <meta property="og:title" content="{{ meta_title }}">
+    <meta property="og:description" content="{{ meta_description }}">
+    <meta property="og:url" content="{{ canonical_url }}">
+    <meta property="og:image" content="{{ social_image_url }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="{{ social_image_alt }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ meta_title }}">
+    <meta name="twitter:description" content="{{ meta_description }}">
+    <meta name="twitter:image" content="{{ social_image_url }}">
+    <meta name="twitter:image:alt" content="{{ social_image_alt }}">
+    <link rel="icon" href="{% static 'website/img/favicon.svg' %}" type="image/svg+xml">
+    <link rel="stylesheet" href="{% static 'website/css/site.css' %}">
+    <script src="{% static 'website/js/site.js' %}" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="wordmark" href="{% url 'website:home' %}">{{ site.name }}</a>
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="primary-navigation"
+        >
+          <span>Menu</span>
+        </button>
+        <nav id="primary-navigation" class="primary-nav" aria-label="Primary navigation">
+          <ul>
+            <li>
+              <a href="{% url 'website:home' %}"{% if request.resolver_match.url_name == "home" %} aria-current="page"{% endif %}>Home</a>
+            </li>
+            <li>
+              <a href="{% url 'website:experience' %}"{% if request.resolver_match.url_name == "experience" %} aria-current="page"{% endif %}>Experience</a>
+            </li>
+            <li>
+              <a href="{% url 'website:case_studies' %}"{% if request.resolver_match.url_name == "case_studies" or request.resolver_match.url_name == "case_study_detail" %} aria-current="page"{% endif %}>Case Studies</a>
+            </li>
+            <li>
+              <a href="{% url 'website:contact' %}"{% if request.resolver_match.url_name == "contact" %} aria-current="page"{% endif %}>Contact</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content">
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <p>{{ site.name }} · Quantitative finance and engineering</p>
+        <ul>
+          <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+          <li>
+            <a href="{{ site.linkedin }}" target="_blank" rel="noreferrer noopener">
+              LinkedIn <span class="visually-hidden">(opens in a new tab)</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </footer>
+  </body>
+</html>

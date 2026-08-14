@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# Django local state
+db.sqlite3
+staticfiles/
+
+# Local tooling
+.DS_Store
+.coverage
+htmlcov/
+.pytest_cache/
+.superpowers/
+.worktrees/
+
+# Generated knowledge graph
+graphify-out/
+
+# Private source materials
+/CLAUDE.md
+01-candidate-profile.md
+02-behavioral-profile.md
+03-writing-style.md
+04-job-evaluation.md
+05-cv-templates.md
+06-cover-letter-templates.md
+07-interview-prep.md
+Profile.pdf
+Norman_Hoang_Resume_BofA_VP_CrossAssetQuant_v1_2page.docx
+main_example.pdf
+main_example.tex

@@ -1,0 +1,10 @@
+{% extends "website/base.html" %}
+
+{% block content %}
+  <header class="page-header">
+    <p class="eyebrow">500</p>
+    <h1>Page unavailable</h1>
+    <p>The portfolio page could not be loaded.</p>
+    <a class="text-link" href="{% url 'website:home' %}">Back home</a>
+  </header>
+{% endblock %}

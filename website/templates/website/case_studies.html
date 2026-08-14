@@ -1,0 +1,24 @@
+{% extends "website/base.html" %}
+
+{% block title %}Case Studies · {{ site.name }}{% endblock %}
+
+{% block content %}
+  <header class="page-header">
+    <p class="eyebrow">Case studies</p>
+    <h1>Quantitative systems, explained through outcomes.</h1>
+    <p class="confidentiality-note">
+      Confidentiality note: these public accounts describe responsibilities, methods,
+      and measured outcomes without exposing proprietary data, parameters, or controls.
+    </p>
+  </header>
+
+  <section class="case-index" aria-labelledby="case-index-title">
+    <p class="section-index" aria-hidden="true">01</p>
+    <h2 id="case-index-title">Selected case studies</h2>
+    <div class="case-grid">
+      {% for study in case_studies %}
+        {% include "website/includes/case_card.html" with study=study %}
+      {% endfor %}
+    </div>
+  </section>
+{% endblock %}

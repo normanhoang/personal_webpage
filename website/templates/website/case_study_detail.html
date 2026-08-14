@@ -1,0 +1,48 @@
+{% extends "website/base.html" %}
+
+{% block title %}{{ study.title }} · {{ site.name }}{% endblock %}
+
+{% block content %}
+  <article class="case-study">
+    <header class="page-header case-header">
+      <div class="case-header__copy">
+        <p class="eyebrow">{{ study.eyebrow }}</p>
+        <h1>{{ study.title }}</h1>
+        <p>{{ study.summary }}</p>
+      </div>
+      <svg class="risk-surface" aria-hidden="true" focusable="false" viewBox="0 0 640 540">
+        <path d="M-18 432C72 331 183 367 257 290C327 217 353 91 465 72C531 61 584 94 658 49" />
+        <path d="M-22 479C71 387 176 416 275 335C370 258 376 147 482 121C545 105 596 135 662 98" />
+        <path class="risk-surface__signal" d="M-20 526C91 443 201 470 296 390C391 310 423 220 505 190C565 168 612 187 660 168" />
+        <path d="M94 558C154 491 240 505 333 444C438 376 454 293 535 260C579 242 624 242 670 221" />
+        <path d="M241 563C309 520 378 508 435 463C511 402 522 342 584 311C616 295 643 289 675 270" />
+        <circle class="risk-surface__point" cx="505" cy="190" r="7" />
+      </svg>
+    </header>
+
+    {% for heading, copy in study.sections.items %}
+      <section class="case-section" aria-labelledby="section-{{ forloop.counter }}">
+        <p class="section-index" aria-hidden="true">0{{ forloop.counter }}</p>
+        <div>
+          <h2 id="section-{{ forloop.counter }}">{{ heading }}</h2>
+          <p>{{ copy }}</p>
+        </div>
+      </section>
+    {% endfor %}
+
+    <section class="case-section technologies" aria-labelledby="technologies-title">
+      <p class="section-index" aria-hidden="true">06</p>
+      <div>
+        <h2 id="technologies-title">Technologies</h2>
+        <ul>
+          {% for technology in study.technologies %}<li>{{ technology }}</li>{% endfor %}
+        </ul>
+      </div>
+    </section>
+
+    <nav class="case-actions" aria-label="Case study actions">
+      <a href="{% url 'website:case_studies' %}">Back to Case Studies</a>
+      <a href="{% url 'website:contact' %}">Contact</a>
+    </nav>
+  </article>
+{% endblock %}

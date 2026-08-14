@@ -1,0 +1,10 @@
+<article class="case-card">
+  <p class="eyebrow">{{ study.eyebrow }}</p>
+  <h3>
+    <a href="{% url 'website:case_study_detail' slug=study.slug %}">{{ study.title }}</a>
+  </h3>
+  <p>{{ study.summary }}</p>
+  <a class="text-link" href="{% url 'website:case_study_detail' slug=study.slug %}">
+    Read case study <span aria-hidden="true">→</span>
+  </a>
+</article>
