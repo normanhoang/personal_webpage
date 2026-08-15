@@ -95,15 +95,27 @@
           </figcaption>
         </figure>
       {% else %}
-        <article class="independent-card">
-          <p class="eyebrow">{{ work.kind }}</p>
-          <h3>{{ work.title }}</h3>
-          <p>{{ work.description }}</p>
-          {% if work.repository %}
-            <a href="{{ work.repository }}" target="_blank" rel="noreferrer noopener">
-              View repository <span class="visually-hidden">(opens in a new tab)</span>
-            </a>
-          {% endif %}
+        <article class="independent-card independent-card--illustrated">
+          <div class="explainability-media">
+            <img
+              class="explainability-image"
+              src="{% static 'website/img/model-explainability.png' %}"
+              alt="Abstract SHAP-style feature contribution plot with cobalt and copper points distributed around a central baseline"
+              width="1536"
+              height="1024"
+              loading="lazy"
+            >
+          </div>
+          <div class="independent-card__copy">
+            <p class="eyebrow">{{ work.kind }}</p>
+            <h3>{{ work.title }}</h3>
+            <p>{{ work.description }}</p>
+            {% if work.repository %}
+              <a href="{{ work.repository }}" target="_blank" rel="noreferrer noopener">
+                View repository <span class="visually-hidden">(opens in a new tab)</span>
+              </a>
+            {% endif %}
+          </div>
         </article>
       {% endif %}
     {% endfor %}

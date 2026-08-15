@@ -65,7 +65,7 @@ The header wordmark is “Norman Hoang.” The mobile header uses an accessible 
 - Evidence-linked capability groups
 - Independent Work:
   - FinApp, with one authentic light-mode screenshot and a direct repository link
-  - Mathematics of Model Explainability, listed as an internal, non-peer-reviewed working paper for Model Risk Management covering XGBoost, SHAP, and feature importance, without a public document link
+  - Mathematics of Model Explainability, with an original abstract SHAP-style illustration and listed as an internal, non-peer-reviewed working paper for Model Risk Management covering XGBoost, SHAP, and feature importance, without a public document link
 
 ### Experience
 
@@ -183,7 +183,7 @@ Use generous but disciplined spacing, strong typographic hierarchy, fine rules, 
 
 The hero contains one restrained resolving contour animation. Hover and focus transitions are subtle. There is no parallax, scroll hijacking, or repeated scroll-reveal system.
 
-Organization names remain text-only. The banking case studies use abstract, code-native diagrams or annotations rather than fabricated screenshots. FinApp uses one authentic bundled light-mode dashboard screenshot from its public repository.
+Organization names remain text-only. The banking case studies use abstract, code-native diagrams or annotations rather than fabricated screenshots. FinApp uses one authentic bundled light-mode dashboard screenshot from its public repository. Mathematics of Model Explainability uses an original, text-free SHAP-style feature-contribution illustration with no third-party logo.
 
 ## Responsive and Accessibility Requirements
 
@@ -197,7 +197,7 @@ Organization names remain text-only. The banking case studies use abstract, code
 - Decorative contour graphics are hidden from assistive technology.
 - Meaning is never conveyed by color alone.
 - `prefers-reduced-motion: reduce` disables nonessential motion.
-- FinApp imagery has useful alternative text and responsive dimensions.
+- FinApp and model-explainability imagery have useful alternative text and responsive dimensions.
 
 ## Error Handling
 

@@ -45,8 +45,21 @@ class RenderedPageTests(SimpleTestCase):
         response = self.client.get(reverse("website:home"))
 
         self.assertContains(response, 'class="finapp-feature"', count=1)
-        self.assertContains(response, 'class="independent-card"', count=1)
+        self.assertContains(
+            response,
+            'class="independent-card independent-card--illustrated"',
+            count=1,
+        )
         self.assertContains(response, "Mathematics of Model Explainability")
+        self.assertContains(
+            response,
+            '<img class="explainability-image" '
+            'src="/static/website/img/model-explainability.png" '
+            'alt="Abstract SHAP-style feature contribution plot with cobalt and '
+            'copper points distributed around a central baseline" '
+            'width="1536" height="1024" loading="lazy">',
+            html=True,
+        )
         self.assertContains(
             response,
             "An internal, non-peer-reviewed working paper for Model Risk Management "

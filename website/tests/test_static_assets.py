@@ -119,6 +119,7 @@ class StaticAssetTests(SimpleTestCase):
             "website/fonts/IBMPlexSans-Variable.ttf",
             "website/fonts/IBMPlexMono-Regular.ttf",
             "website/img/finapp-dashboard-light.png",
+            "website/img/model-explainability.png",
             "website/img/social-card.svg",
             "website/img/social-card.png",
         ):
@@ -321,6 +322,17 @@ class StaticAssetTests(SimpleTestCase):
         self.assertEqual(struct.unpack(">I", image_data[8:12])[0], 13)
         self.assertEqual(image_data[12:16], b"IHDR")
         self.assertEqual(struct.unpack(">II", image_data[16:24]), (1242, 2688))
+
+    def test_model_explainability_png_has_valid_signature_and_dimensions(self):
+        image_data = self._static_path(
+            "website/img/model-explainability.png"
+        ).read_bytes()
+
+        self.assertGreater(len(image_data), 50_000)
+        self.assertLess(len(image_data), 250_000)
+        self.assertEqual(image_data[:8], b"\x89PNG\r\n\x1a\n")
+        self.assertEqual(image_data[12:16], b"IHDR")
+        self.assertEqual(struct.unpack(">II", image_data[16:24]), (1536, 1024))
 
     def test_social_card_is_discoverable_png_with_share_dimensions(self):
         image_path = self._static_path("website/img/social-card.png")
