@@ -30,7 +30,7 @@ PROOF_POINTS = (
     },
     {
         "value": "58 → 119",
-        "label": "users of the shared statistical library",
+        "label": "weekly active users of the shared statistical library",
         "detail": "Adoption grew through Knowledge Shares and a user-driven roadmap.",
     },
     {

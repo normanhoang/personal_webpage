@@ -34,6 +34,9 @@ class RenderedPageTests(SimpleTestCase):
         )
         self.assertContains(response, "~2B")
         self.assertContains(response, "58 → 119")
+        self.assertContains(
+            response, "weekly active users of the shared statistical library"
+        )
         self.assertContains(response, "IFRS · CECL · CCAR")
         self.assertNotContains(response, "70% / 60%")
         self.assertContains(response, "normanhoang@gmail.com")

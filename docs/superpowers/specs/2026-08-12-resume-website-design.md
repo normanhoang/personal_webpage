@@ -59,7 +59,7 @@ The header wordmark is “Norman Hoang.” The mobile header uses an accessible 
 - Secondary action: Experience
 - Proof ledger above the fold:
   - `~2B` market-data records processed daily
-  - `58 → 119` users of the shared statistical library
+  - `58 → 119` weekly active users of the shared statistical library
   - `IFRS · CECL · CCAR` risk processes supported by calibration outputs
 - Selected case-study previews
 - Evidence-linked capability groups
