@@ -523,7 +523,7 @@ main {
 .case-card > p:not(.eyebrow),
 .capability-group p,
 .project-card p,
-.independent-card p,
+.independent-card p:not(.eyebrow),
 .education-item p {
   color: var(--slate);
 }
