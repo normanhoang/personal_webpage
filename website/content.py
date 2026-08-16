@@ -189,7 +189,14 @@ EDUCATION = (
             "B.S. in Electrical Engineering, Specialization in Systems and Signals"
         ),
         "dates": "2007–2012",
-        "coursework": (),
+        "coursework": (
+            "Parallel computing",
+            "Data structures and algorithms",
+            "Engineering probability",
+            "Linear algebra",
+            "Differential equations",
+            "C programming",
+        ),
     },
 )
 

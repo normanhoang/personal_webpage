@@ -79,6 +79,7 @@ The header wordmark is “Norman Hoang.” The mobile header uses an accessible 
   - M.S. in Quantitative Finance, Fordham University
   - B.S. in Electrical Engineering, Specialization in Systems and Signals, University of California, Irvine
 - Selected M.S. coursework: stochastic calculus, derivatives and fixed income, risk management, advanced C++, and computational finance
+- Selected B.S. coursework: parallel computing, data structures and algorithms, engineering probability, linear algebra, differential equations, and C programming
 - Four compact academic-project entries:
   - Algorithmic trading prototype
   - C++ pricing and risk library
