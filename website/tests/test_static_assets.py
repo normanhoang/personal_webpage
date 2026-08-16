@@ -11,6 +11,8 @@ from django.test import SimpleTestCase
 from django.templatetags.static import static
 from django.urls import reverse
 
+from website.content import CASE_STUDIES
+
 
 class _PageContractParser(HTMLParser):
     _void_elements = {
@@ -37,6 +39,7 @@ class _PageContractParser(HTMLParser):
         self.primary_navigation = None
         self.icons = []
         self.risk_surfaces = []
+        self.case_arts = []
         self.stylesheets = []
         self.scripts = []
         self.proof_ledger_inside_hero = False
@@ -68,14 +71,18 @@ class _PageContractParser(HTMLParser):
         if tag == "script" and attributes.get("src"):
             self.scripts.append(attributes)
 
-        if tag == "svg" and "risk-surface" in classes:
+        if tag == "svg" and ("risk-surface" in classes or "case-art" in classes):
             self._current_surface = {
                 "attributes": attributes,
                 "paths": [],
                 "circles": [],
                 "text": [],
+                "in_case_header": "case-header" in ancestor_classes,
             }
-            self.risk_surfaces.append(self._current_surface)
+            if "risk-surface" in classes:
+                self.risk_surfaces.append(self._current_surface)
+            else:
+                self.case_arts.append(self._current_surface)
         elif self._current_surface is not None and tag == "path":
             self._current_surface["paths"].append(attributes)
         elif self._current_surface is not None and tag == "circle":
@@ -194,37 +201,64 @@ class StaticAssetTests(SimpleTestCase):
         self.assertTrue(page.proof_ledger_inside_hero)
         self.assertEqual(page.proof_item_count, 3)
 
-    def test_home_and_detail_risk_surfaces_are_complete_decorative_graphics(self):
-        routes = (
-            reverse("website:home"),
-            reverse(
-                "website:case_study_detail", kwargs={"slug": "risk-calibration"}
-            ),
-        )
+    def test_home_risk_surface_is_a_complete_decorative_graphic(self):
+        page = self._page_contract(reverse("website:home"))
 
-        for route in routes:
-            with self.subTest(route=route):
-                page = self._page_contract(route)
-                self.assertEqual(len(page.risk_surfaces), 1)
-                surface = page.risk_surfaces[0]
-                self.assertEqual(surface["attributes"].get("aria-hidden"), "true")
-                self.assertEqual(surface["attributes"].get("focusable"), "false")
-                self.assertEqual(surface["attributes"].get("viewbox"), "0 0 640 540")
-                self.assertEqual(len(surface["paths"]), 5)
+        self.assertEqual(len(page.risk_surfaces), 1)
+        surface = page.risk_surfaces[0]
+        self.assertEqual(surface["attributes"].get("aria-hidden"), "true")
+        self.assertEqual(surface["attributes"].get("focusable"), "false")
+        self.assertEqual(surface["attributes"].get("viewbox"), "0 0 640 540")
+        self.assertEqual(len(surface["paths"]), 5)
+        self.assertEqual(
+            sum(
+                "risk-surface__signal" in path.get("class", "").split()
+                for path in surface["paths"]
+            ),
+            1,
+        )
+        self.assertEqual(len(surface["circles"]), 1)
+        self.assertIn(
+            "risk-surface__point",
+            surface["circles"][0].get("class", "").split(),
+        )
+        self.assertFalse("".join(surface["text"]).strip())
+
+    def test_each_case_study_header_carries_distinct_decorative_art(self):
+        fingerprints = set()
+
+        for study in CASE_STUDIES:
+            with self.subTest(slug=study["slug"]):
+                self.assertTrue(study.get("art"))
+                page = self._page_contract(
+                    reverse(
+                        "website:case_study_detail", kwargs={"slug": study["slug"]}
+                    )
+                )
+                self.assertEqual(page.risk_surfaces, [])
+                self.assertEqual(len(page.case_arts), 1)
+                art = page.case_arts[0]
+                self.assertTrue(art["in_case_header"])
+                self.assertEqual(art["attributes"].get("aria-hidden"), "true")
+                self.assertEqual(art["attributes"].get("focusable"), "false")
+                self.assertEqual(art["attributes"].get("viewbox"), "0 0 640 540")
+                self.assertFalse("".join(art["text"]).strip())
+                self.assertGreaterEqual(len(art["paths"]), 3)
                 self.assertEqual(
                     sum(
-                        "risk-surface__signal"
-                        in path.get("class", "").split()
-                        for path in surface["paths"]
+                        "case-art__signal" in path.get("class", "").split()
+                        for path in art["paths"]
                     ),
                     1,
                 )
-                self.assertEqual(len(surface["circles"]), 1)
+                self.assertEqual(len(art["circles"]), 1)
                 self.assertIn(
-                    "risk-surface__point",
-                    surface["circles"][0].get("class", "").split(),
+                    "case-art__point",
+                    art["circles"][0].get("class", "").split(),
                 )
-                self.assertFalse("".join(surface["text"]).strip())
+                fingerprints.add(tuple(path.get("d") for path in art["paths"]))
+
+        self.assertEqual(len(fingerprints), len(CASE_STUDIES))
 
     def test_finapp_image_uses_source_pixel_dimensions(self):
         response = self.client.get(reverse("website:home"))

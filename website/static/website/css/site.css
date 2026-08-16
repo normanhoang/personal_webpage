@@ -378,7 +378,8 @@ main {
   letter-spacing: 0.03em;
 }
 
-.risk-surface {
+.risk-surface,
+.case-art {
   width: 100%;
   overflow: hidden;
   color: var(--rule);
@@ -388,22 +389,26 @@ main {
   vector-effect: non-scaling-stroke;
 }
 
-.risk-surface path {
+.risk-surface path,
+.case-art path {
   stroke-dasharray: 13 9;
   animation: contour-drift 18s linear infinite;
 }
 
-.risk-surface path:nth-child(even) {
+.risk-surface path:nth-child(even),
+.case-art path:nth-child(even) {
   animation-direction: reverse;
   animation-duration: 22s;
 }
 
-.risk-surface .risk-surface__signal {
+.risk-surface .risk-surface__signal,
+.case-art .case-art__signal {
   color: var(--cobalt);
   stroke-width: 2.5;
 }
 
-.risk-surface__point {
+.risk-surface__point,
+.case-art__point {
   fill: var(--copper);
   stroke: var(--ledger);
   stroke-width: 5;
@@ -972,7 +977,8 @@ main {
   }
 
   .hero .risk-surface,
-  .case-header .risk-surface {
+  .case-header .risk-surface,
+  .case-header .case-art {
     width: min(100%, 34rem);
     margin: -2rem auto -3rem;
   }
@@ -1122,7 +1128,8 @@ main {
     transition-duration: 0.01ms !important;
   }
 
-  .risk-surface path {
+  .risk-surface path,
+  .case-art path {
     animation: none;
   }
 }

@@ -288,6 +288,7 @@ CASE_STUDIES = (
         "slug": "risk-calibration",
         "title": "Financial Risk Calibration Library",
         "eyebrow": "Risk & regulatory analytics",
+        "art": "case-art/risk-calibration.html",
         "summary": (
             "Improving reusable calibration tooling whose outputs support IFRS, "
             "CECL, and CCAR risk processes."
@@ -332,6 +333,7 @@ CASE_STUDIES = (
         "slug": "spark-python-modernization",
         "title": "Spark and Python Quant Platform Modernization",
         "eyebrow": "Quant platform engineering",
+        "art": "case-art/spark-python-modernization.html",
         "summary": (
             "Modernizing shared quantitative tooling and the environment used to "
             "develop and run it across Global Risk Analytics."
@@ -374,6 +376,7 @@ CASE_STUDIES = (
         "slug": "group-lasso",
         "title": "Group Lasso Model Implementation and Runtime Optimization",
         "eyebrow": "Model implementation & optimization",
+        "art": "case-art/group-lasso.html",
         "summary": (
             "Research-to-production implementation of grouped regression methods "
             "with measured runtime improvements."
@@ -412,6 +415,7 @@ CASE_STUDIES = (
         "slug": "oracle-trino",
         "title": "Oracle-to-Trino Pipeline Modernization",
         "eyebrow": "Production-scale data engineering",
+        "art": "case-art/oracle-trino.html",
         "summary": (
             "Rebuilding an unreliable bulk extraction into a parallel, skew-aware "
             "pipeline for downstream analytics."
